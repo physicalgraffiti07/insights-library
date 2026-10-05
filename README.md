@@ -19,7 +19,7 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 |-----------------|-------------------------------------------|
 | `index.html`    | Page unique                               |
 | `styles.css`    | Cartes horizontales + couvertures typographiques CNRS |
-| `app.js`        | Filtres, cartes, actions                  |
+| `app.js`        | Filtres, cartes, click-to-play, actions   |
 | `pepites.json`  | Données — ajoutez vos insights ici        |
 
 Les assets déployés portent un suffixe horodaté (`styles.YYYYMMDDHHMMSS.css`, `app.…js`) pour le cache-busting ; `index.html` pointe vers ces fichiers.
@@ -55,12 +55,10 @@ Les assets déployés portent un suffixe horodaté (`styles.YYYYMMDDHHMMSS.css`,
 
 Mise en page **horizontale** (desktop) :
 
-- **Gauche** — couverture typographique style CNRS / De Vive Voix (fond crème, bordure bleu sombre, trois bandes : thème · titre en capitales · plage horaire). Aucune photo, aucune vignette YouTube, aucun visage.
-- **Droite** — pastille thème, horaires, titre, source, résumé, boutons **Lire le passage** / **Copier le lien** / **Voir sur YouTube**.
+- **Gauche** — couverture typographique style CNRS / De Vive Voix (fond crème, bordure bleu sombre, trois bandes : thème · titre en capitales · plage horaire). **Texte uniquement** jusqu’au clic — aucune photo, aucune vignette YouTube (`ytimg`), aucun visage. Un clic sur la couverture remplace le panneau gauche par un iframe YouTube (horodatage `start`/`end`, autoplay).
+- **Droite** — pastille thème, horaires, titre, source, résumé, boutons **Lire le passage** / **Copier le lien** / **Voir sur YouTube** (inchangés).
 
-Pas de « Lire ici », pas d’iframe, pas d’`ytimg`.
-
-Les liens pointent vers :
+Les liens externes pointent vers :
 `https://www.youtube.com/watch?v=VIDEO_ID&t=STARTs`
 
 ## Filtres & liens
@@ -78,4 +76,4 @@ Branche `main`, racine `/`.
 
 ## Règle copyright
 
-**Uniquement** des liens YouTube originaux avec horodatage `t=`. Ne jamais télécharger ni re-uploader la vidéo.
+**Uniquement** des liens / embeds YouTube originaux avec horodatage. Ne jamais télécharger ni re-uploader la vidéo.

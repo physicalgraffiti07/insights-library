@@ -204,11 +204,39 @@ body {
 .card:nth-child(3) { animation-delay: 0.12s; }
 .card:nth-child(4) { animation-delay: 0.18s; }
 
-/* —— CNRS / De Vive Voix style cover —— */
+/* —— CNRS / De Vive Voix style cover (clickable vignette) —— */
 .cover {
   margin: 0;
   width: 168px;
   flex-shrink: 0;
+  transition: width 0.25s var(--ease);
+}
+
+.cover-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cover-facade {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.cover-facade:focus-visible {
+  outline: 2px solid var(--cover-ink);
+  outline-offset: 3px;
 }
 
 .cover-inner {
@@ -224,6 +252,87 @@ body {
   border: 1.5px solid var(--cover-border);
   color: var(--cover-ink);
   box-sizing: border-box;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.cover-facade:hover .cover-inner,
+.cover-facade:focus-visible .cover-inner {
+  box-shadow: inset 0 0 0 1px var(--cover-ink);
+}
+
+.cover-cue {
+  position: absolute;
+  right: 0.45rem;
+  bottom: 0.45rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  color: var(--cover-ink);
+  opacity: 0.72;
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.cover-facade:hover .cover-cue,
+.cover-facade:focus-visible .cover-cue {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* Playing: same left panel becomes 16:9 YouTube embed */
+.card.is-playing {
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+}
+
+.cover.is-playing {
+  width: 100%;
+}
+
+.cover-stage.is-playing {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  max-height: none;
+  height: auto;
+  background: #000;
+  border: 1.5px solid var(--border-strong);
+  overflow: hidden;
+}
+
+.cover-stage.is-playing iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+
+.embed-fallback {
+  position: absolute;
+  left: 0.4rem;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  z-index: 2;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  color: #f7f5f0;
+  background: rgba(0, 0, 0, 0.72);
+  text-decoration: none;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+}
+
+.cover-stage.is-playing:hover .embed-fallback,
+.cover-stage.is-playing:focus-within .embed-fallback {
+  opacity: 0.95;
+  pointer-events: auto;
 }
 
 .cover-label {
@@ -506,6 +615,15 @@ body {
     width: 100%;
     max-width: 220px;
     margin: 0 auto;
+  }
+
+  .card.is-playing {
+    grid-template-columns: 1fr;
+  }
+
+  .cover.is-playing {
+    max-width: none;
+    width: 100%;
   }
 
   .cover-inner {

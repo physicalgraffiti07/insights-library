@@ -25,6 +25,23 @@
     return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${start}s`;
   }
 
+  function embedUrl(videoId, start, end) {
+    const params = new URLSearchParams({
+      start: String(start ?? 0),
+      rel: "0",
+      playsinline: "1",
+      autoplay: "1",
+      mute: "0",
+      enablejsapi: "1",
+      widget_referrer: window.location.origin || "",
+      origin: window.location.origin || "",
+    });
+    if (end != null && end !== "" && Number(end) > Number(start)) {
+      params.set("end", String(end));
+    }
+    return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${params}`;
+  }
+
   function coverLabel(p) {
     if (Array.isArray(p.themes) && p.themes.length) {
       return p.themes[0];
@@ -96,6 +113,37 @@
     document.body.removeChild(ta);
   }
 
+  function activateEmbed(stage, article, videoId, start, end, title) {
+    if (stage.dataset.activated === "1") return;
+    stage.dataset.activated = "1";
+    stage.classList.add("is-playing");
+    article.classList.add("is-playing");
+    const cover = stage.closest(".cover");
+    if (cover) cover.classList.add("is-playing");
+
+    const iframe = document.createElement("iframe");
+    iframe.src = embedUrl(videoId, start, end);
+    iframe.title = title || "Extrait YouTube";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+    iframe.allowFullscreen = true;
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.setAttribute("frameborder", "0");
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.setAttribute("loading", "eager");
+
+    const fallback = document.createElement("a");
+    fallback.className = "embed-fallback";
+    fallback.href = watchUrl(videoId, start);
+    fallback.target = "_blank";
+    fallback.rel = "noopener noreferrer";
+    fallback.textContent = "Si l’écran reste noir, ouvrir sur YouTube";
+
+    stage.innerHTML = "";
+    stage.appendChild(iframe);
+    stage.appendChild(fallback);
+  }
+
   function createCard(p) {
     const node = template.content.cloneNode(true);
     const article = node.querySelector(".card");
@@ -105,11 +153,21 @@
     const passageUrl = watchUrl(p.videoId, p.start);
     const timeLabel = `${formatTime(p.start)} → ${formatTime(p.end)}`;
 
-    // Typographic cover (no images, no ytimg, no faces)
+    // Typographic cover (no images, no ytimg, no faces) — click to embed
     node.querySelector(".cover-label").textContent = coverLabel(p);
     node.querySelector(".cover-title").textContent = title;
     node.querySelector(".cover-meta").textContent =
       p.start != null && p.end != null ? timeLabel : "Insight";
+
+    const stage = node.querySelector(".cover-stage");
+    const facade = node.querySelector(".cover-facade");
+    facade.setAttribute(
+      "aria-label",
+      `Lire ici « ${title} » (${formatTime(p.start)} → ${formatTime(p.end)})`
+    );
+    facade.addEventListener("click", () => {
+      activateEmbed(stage, article, p.videoId, p.start, p.end, title);
+    });
 
     node.querySelector(".theme-pill").textContent =
       p.theme || (p.themes && p.themes.join(" / ")) || "—";
