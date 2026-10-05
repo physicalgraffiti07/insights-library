@@ -25,6 +25,21 @@
     return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${start}s`;
   }
 
+  function coverLabel(p) {
+    if (Array.isArray(p.themes) && p.themes.length) {
+      return p.themes[0];
+    }
+    if (p.theme) {
+      return String(p.theme).split(/\s*\/\s*/)[0].trim() || p.theme;
+    }
+    if (p.source) {
+      const parts = String(p.source).split(/[—–\-]/);
+      const last = parts[parts.length - 1].trim();
+      if (last) return last.split("/")[0].trim();
+    }
+    return "Insight";
+  }
+
   function collectThemes(items) {
     const set = new Set();
     items.forEach((p) => {
@@ -81,7 +96,6 @@
     document.body.removeChild(ta);
   }
 
-
   function createCard(p) {
     const node = template.content.cloneNode(true);
     const article = node.querySelector(".card");
@@ -89,11 +103,17 @@
 
     const title = p.title || "Extrait YouTube";
     const passageUrl = watchUrl(p.videoId, p.start);
+    const timeLabel = `${formatTime(p.start)} → ${formatTime(p.end)}`;
+
+    // Typographic cover (no images, no ytimg, no faces)
+    node.querySelector(".cover-label").textContent = coverLabel(p);
+    node.querySelector(".cover-title").textContent = title;
+    node.querySelector(".cover-meta").textContent =
+      p.start != null && p.end != null ? timeLabel : "Insight";
 
     node.querySelector(".theme-pill").textContent =
       p.theme || (p.themes && p.themes.join(" / ")) || "—";
-    node.querySelector(".time-range").textContent =
-      `${formatTime(p.start)} → ${formatTime(p.end)}`;
+    node.querySelector(".time-range").textContent = timeLabel;
     node.querySelector(".card-title").textContent = p.title || "";
     node.querySelector(".card-source").textContent = p.source || "";
     node.querySelector(".card-summary").textContent = p.summary || "";
@@ -104,7 +124,6 @@
       "aria-label",
       `Lire le passage « ${title} » sur YouTube à ${formatTime(p.start)}`
     );
-
 
     const link = node.querySelector(".yt-link");
     link.href = passageUrl;

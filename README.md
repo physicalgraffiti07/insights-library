@@ -1,6 +1,6 @@
 # Bibliothèque d'insights
 
-Collection privée d’extraits YouTube (embeds officiels uniquement — aucun téléchargement ni re-upload).
+Collection privée d’extraits YouTube (liens horodatés uniquement — aucun téléchargement ni re-upload).
 
 ## Ouvrir en local
 
@@ -11,16 +11,18 @@ python3 -m http.server 8765
 
 Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué).
 
-> Les iframes YouTube et le chargement de `pepites.json` nécessitent un serveur HTTP (pas d’ouverture directe du fichier `file://`).
+> Le chargement de `pepites.json` nécessite un serveur HTTP (pas d’ouverture directe du fichier `file://`).
 
 ## Structure
 
 | Fichier         | Rôle                                      |
 |-----------------|-------------------------------------------|
 | `index.html`    | Page unique                               |
-| `styles.css`    | Thème clair élégant (blanc / champagne)                      |
-| `app.js`        | Filtres, cartes, embeds                   |
+| `styles.css`    | Cartes horizontales + couvertures typographiques CNRS |
+| `app.js`        | Filtres, cartes, actions                  |
 | `pepites.json`  | Données — ajoutez vos insights ici        |
+
+Les assets déployés portent un suffixe horodaté (`styles.YYYYMMDDHHMMSS.css`, `app.…js`) pour le cache-busting ; `index.html` pointe vers ces fichiers.
 
 ## Ajouter un insight
 
@@ -49,15 +51,16 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 - **start** / **end** — secondes (début et fin de l’extrait)
 - **title**, **source**, **summary** — textes affichés
 
-Cartes **typographiques** (pas de vignette YouTube) : grand titre sérif,
-chrome minimal. Lecture via « **Lire le passage** » (lien horodaté YouTube,
-fiable) et optionnellement « **Lire ici** » (embed click-to-load).
+### Cartes
 
-L’iframe
-`https://www.youtube.com/embed/VIDEO_ID?start=&end=&rel=0&playsinline=1&autoplay=1`
-n’est chargée qu’au clic sur « Lire ici ».
+Mise en page **horizontale** (desktop) :
 
-« Lire le passage » / « Voir sur YouTube » pointent vers :
+- **Gauche** — couverture typographique style CNRS / De Vive Voix (fond crème, bordure bleu sombre, trois bandes : thème · titre en capitales · plage horaire). Aucune photo, aucune vignette YouTube, aucun visage.
+- **Droite** — pastille thème, horaires, titre, source, résumé, boutons **Lire le passage** / **Copier le lien** / **Voir sur YouTube**.
+
+Pas de « Lire ici », pas d’iframe, pas d’`ytimg`.
+
+Les liens pointent vers :
 `https://www.youtube.com/watch?v=VIDEO_ID&t=STARTs`
 
 ## Filtres & liens
@@ -75,4 +78,4 @@ Branche `main`, racine `/`.
 
 ## Règle copyright
 
-**Uniquement** des embeds YouTube originaux avec `start` / `end`. Ne jamais télécharger ni re-uploader la vidéo.
+**Uniquement** des liens YouTube originaux avec horodatage `t=`. Ne jamais télécharger ni re-uploader la vidéo.

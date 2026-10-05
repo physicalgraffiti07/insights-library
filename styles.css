@@ -1,6 +1,6 @@
-/* —— Insights library — sober editorial typography —— */
+/* —— Insights library — CNRS / De Vive Voix typographic covers —— */
 :root {
-  --bg: #ffffff;
+  --bg: #f7f5f0;
   --bg-elevated: #ffffff;
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
@@ -11,12 +11,14 @@
   --text-soft: #8a8278;
   --accent: #2c2824;
   --accent-soft: rgba(28, 24, 20, 0.05);
-  --accent-glow: transparent;
+  --cover-bg: #f4f1e8;
+  --cover-ink: #2f3f8f;
+  --cover-border: #2f3f8f;
   --pill-bg: transparent;
   --pill-text: #5a534c;
   --radius: 2px;
   --radius-sm: 999px;
-  --shadow: none;
+  --shadow: 0 1px 2px rgba(28, 24, 20, 0.04), 0 8px 24px rgba(28, 24, 20, 0.05);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -61,7 +63,7 @@ body {
 }
 
 .header-inner {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +109,7 @@ body {
 }
 
 .main {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 1.75rem 1.5rem 4rem;
 }
@@ -163,30 +165,28 @@ body {
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 1.35rem;
 }
 
-/* Editorial card — typographic, no media */
+/* Horizontal card: typographic cover LEFT + text RIGHT */
 .card {
-  display: block;
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 1.35rem 1.5rem;
+  align-items: stretch;
   background: var(--bg-card);
-  border: none;
-  border-top: 1px solid var(--border);
-  border-radius: 0;
-  overflow: visible;
-  box-shadow: none;
-  transition: background 0.25s var(--ease);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
   animation: card-in 0.5s var(--ease) both;
-  padding: 2rem 0 2.15rem;
-}
-
-.card:first-child {
-  border-top: none;
-  padding-top: 0.5rem;
+  padding: 1.15rem;
 }
 
 .card:hover {
-  background: var(--bg-card);
+  border-color: var(--border-strong);
+  box-shadow: 0 2px 4px rgba(28, 24, 20, 0.05), 0 12px 28px rgba(28, 24, 20, 0.07);
 }
 
 @keyframes card-in {
@@ -204,11 +204,99 @@ body {
 .card:nth-child(3) { animation-delay: 0.12s; }
 .card:nth-child(4) { animation-delay: 0.18s; }
 
+/* —— CNRS / De Vive Voix style cover —— */
+.cover {
+  margin: 0;
+  width: 168px;
+  flex-shrink: 0;
+}
+
+.cover-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  aspect-ratio: 1 / 1.12;
+  min-height: 188px;
+  height: 100%;
+  max-height: 220px;
+  padding: 0.7rem 0.65rem;
+  background: var(--cover-bg);
+  border: 1.5px solid var(--cover-border);
+  color: var(--cover-ink);
+  box-sizing: border-box;
+}
+
+.cover-label {
+  margin: 0;
+  padding: 0 0.15rem 0.55rem;
+  border-bottom: 1px solid var(--cover-ink);
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--cover-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cover-title-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.1rem;
+  min-height: 0;
+}
+
+.cover-title {
+  margin: 0;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 1.55vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.22;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--cover-ink);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.cover-footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--cover-ink);
+  text-align: center;
+}
+
+.cover-meta {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cover-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  padding: 0;
+  gap: 0.45rem;
+  padding: 0.15rem 0.15rem 0.1rem 0;
   min-width: 0;
 }
 
@@ -217,22 +305,22 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 1rem;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
 .theme-pill {
   display: inline-flex;
   align-items: center;
   max-width: 100%;
-  padding: 0;
-  border-radius: 0;
-  font-size: 0.7rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--pill-text);
-  background: transparent;
-  border: none;
+  background: rgba(28, 24, 20, 0.05);
+  border: 1px solid var(--border);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -248,16 +336,16 @@ body {
 .card-title {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 3.8vw, 2.15rem);
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
   font-weight: 600;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.015em;
   color: var(--text);
-  max-width: 28ch;
+  max-width: 34ch;
 }
 
 .card-source {
-  margin: 0.1rem 0 0;
+  margin: 0.05rem 0 0;
   font-size: 0.88rem;
   color: var(--text-soft);
   font-style: italic;
@@ -265,20 +353,19 @@ body {
 }
 
 .card-summary {
-  margin: 0.35rem 0 0;
-  font-size: 0.92rem;
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.55;
-  max-width: 52ch;
+  max-width: 58ch;
 }
 
-/* Actions — discreet text links */
 .card-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35rem 1.1rem;
-  margin-top: 0.85rem;
+  margin-top: auto;
   padding-top: 0.85rem;
   border-top: 1px solid var(--border);
 }
@@ -304,38 +391,6 @@ body {
 .lire-passage:focus-visible {
   outline: 2px solid var(--text);
   outline-offset: 3px;
-}
-
-.lire-ici-btn {
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.15rem 0;
-  border: none;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  font-family: inherit;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-soft);
-  cursor: pointer;
-  touch-action: manipulation;
-  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
-}
-
-.lire-ici-btn:hover {
-  color: var(--text);
-  border-bottom-color: var(--border-strong);
-}
-
-.lire-ici-btn:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
-}
-
-.lire-ici-btn.is-active {
-  color: var(--text);
-  border-bottom-color: var(--text);
 }
 
 .yt-link {
@@ -395,55 +450,6 @@ body {
   border-bottom-color: var(--text);
 }
 
-/* Optional inline player — only after « Lire ici » */
-.card-player {
-  margin-top: 1rem;
-}
-
-.card-player[hidden] {
-  display: none;
-}
-
-.embed-wrap {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-top: 56.25%;
-  overflow: hidden;
-  background: #f4f3f1;
-  border: 1px solid var(--border);
-}
-
-.embed-wrap iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #111;
-}
-
-.embed-fallback {
-  position: absolute;
-  left: 0.5rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  z-index: 2;
-  padding: 0.45rem 0.6rem;
-  border-radius: 2px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  color: #1a1816;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.embed-wrap:has(iframe) .embed-fallback {
-  opacity: 0.9;
-}
-
 .empty-state {
   margin: 3rem auto;
   text-align: center;
@@ -471,7 +477,7 @@ body {
   color: var(--text-muted);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .site-header {
     padding: 2rem 1.15rem 1.25rem;
   }
@@ -491,17 +497,33 @@ body {
   }
 
   .card {
-    padding: 1.65rem 0 1.75rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .cover {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .cover-inner {
+    max-height: none;
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .cover-title {
+    font-size: clamp(0.85rem, 3.8vw, 1.05rem);
   }
 
   .card-title {
-    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+    font-size: clamp(1.35rem, 5.5vw, 1.7rem);
     max-width: none;
   }
 
   .card-summary {
     max-width: none;
-    font-size: 0.9rem;
   }
 
   .card-actions {
@@ -509,7 +531,6 @@ body {
   }
 
   .lire-passage,
-  .lire-ici-btn,
   .yt-link,
   .copy-passage-btn {
     min-height: 2.4rem;
