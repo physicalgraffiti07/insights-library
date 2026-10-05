@@ -1,4 +1,4 @@
-# Bibliothèque de pépites
+# Bibliothèque d'insights
 
 Collection privée d’extraits YouTube (embeds officiels uniquement — aucun téléchargement ni re-upload).
 
@@ -20,9 +20,9 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 | `index.html`    | Page unique                               |
 | `styles.css`    | Thème sombre élégant                      |
 | `app.js`        | Filtres, cartes, embeds                   |
-| `pepites.json`  | Données — ajoutez vos pépites ici         |
+| `pepites.json`  | Données — ajoutez vos insights ici        |
 
-## Ajouter une pépite
+## Ajouter un insight
 
 Éditez `pepites.json` et ajoutez un objet dans le tableau `pepites` :
 
@@ -61,15 +61,12 @@ Le bouton « Voir sur YouTube » pointe vers :
 - `?theme=Fiscalité` pour pré-filtrer
 - `#mon-slug-unique` pour scroller jusqu’à une carte
 
-## Hébergement (lien partageable)
+## Hébergement
 
-GitHub n’est pas encore connecté sur ce compte. Pour publier :
+Publié sur GitHub Pages :
+[https://physicalgraffiti07.github.io/pepites-library/](https://physicalgraffiti07.github.io/pepites-library/)
 
-1. Connecter GitHub (`gh auth login` ou connecteur GitHub Cursor)
-2. Créer un dépôt `pepites-library` (public pour Pages simple, ou private + Pages selon le plan)
-3. Pousser ce dossier et activer **GitHub Pages** (branche `main`, racine `/`)
-
-Sans GitHub : servir ce dossier via n’importe quel hébergeur statique (Netlify Drop, Cloudflare Pages, etc.).
+Branche `main`, racine `/`.
 
 ## Règle copyright
 

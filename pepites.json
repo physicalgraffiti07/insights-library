@@ -1,11 +1,14 @@
 {
-  "title": "Bibliothèque de pépites",
+  "title": "Bibliothèque d'insights",
   "description": "Extraits YouTube sélectionnés — embeds uniquement, sans téléchargement.",
   "pepites": [
     {
       "id": "holding-menottes-dorees",
       "theme": "Fiscalité / Holding France",
-      "themes": ["Fiscalité", "Holding France"],
+      "themes": [
+        "Fiscalité",
+        "Holding France"
+      ],
       "title": "La holding française te lie à la France (menottes dorées)",
       "videoId": "K9ioanmVmGw",
       "start": 4417,
@@ -16,7 +19,11 @@
     {
       "id": "ultra-riches-isf",
       "theme": "Fiscalité / Expatriation / ISF",
-      "themes": ["Fiscalité", "Expatriation", "ISF"],
+      "themes": [
+        "Fiscalité",
+        "Expatriation",
+        "ISF"
+      ],
       "title": "Les ultra-riches partent face au retour de l'ISF",
       "videoId": "K9ioanmVmGw",
       "start": 4157,

@@ -105,10 +105,10 @@
     const n = filtered.length;
     resultCount.textContent =
       n === 0
-        ? "0 pépite"
+        ? "0 insight"
         : n === 1
-          ? "1 pépite"
-          : `${n} pépites`;
+          ? "1 insight"
+          : `${n} insights`;
 
     emptyState.hidden = n !== 0;
   }

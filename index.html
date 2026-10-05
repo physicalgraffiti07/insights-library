@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Bibliothèque privée de pépites YouTube — embeds uniquement." />
-  <title>Pépites — Bibliothèque</title>
+  <meta name="description" content="Bibliothèque privée d'insights YouTube — embeds uniquement." />
+  <title>Insights — Bibliothèque</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
         <span class="brand-mark" aria-hidden="true">◆</span>
         <div>
           <p class="brand-eyebrow">Collection privée</p>
-          <h1 class="brand-title">Pépites</h1>
+          <h1 class="brand-title">Insights</h1>
         </div>
       </div>
       <p class="header-desc">Extraits YouTube sélectionnés — lecture directe, sans téléchargement.</p>
@@ -33,15 +33,15 @@
 
     <p class="result-count" id="result-count" aria-live="polite"></p>
 
-    <section class="grid" id="pepites-grid" aria-label="Liste des pépites"></section>
+    <section class="grid" id="pepites-grid" aria-label="Liste des insights"></section>
 
     <p class="empty-state" id="empty-state" hidden>
-      Aucune pépite pour ce filtre.
+      Aucun insight pour ce filtre.
     </p>
   </main>
 
   <footer class="site-footer">
-    <p>Embeds YouTube officiels uniquement · Ajoutez des pépites via <code>pepites.json</code></p>
+    <p>Embeds YouTube officiels uniquement · Ajoutez des insights via <code>pepites.json</code></p>
   </footer>
 
   <template id="card-template">
@@ -50,7 +50,7 @@
         <div class="embed-wrap">
           <iframe
             loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
             referrerpolicy="strict-origin-when-cross-origin"
             title=""
