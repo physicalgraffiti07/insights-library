@@ -26,8 +26,15 @@
       start: String(start),
       end: String(end),
       rel: "0",
+      modestbranding: "1",
+      playsinline: "1",
     });
-    return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?${params}`;
+    // Identify embed host for YouTube (avoids Error 153 when Referer is required)
+    if (window.location && window.location.origin && window.location.origin !== "null") {
+      params.set("origin", window.location.origin);
+    }
+    // Use www.youtube.com (not youtube-nocookie) for more reliable playback on Pages
+    return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${params}`;
   }
 
   function watchUrl(videoId, start) {

@@ -20,7 +20,7 @@
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --media-max: 300px;
+  --media-max: 370px;
 }
 
 *,
@@ -185,7 +185,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.15rem;
-  max-width: 760px;
+  max-width: 880px;
 }
 
 .card {
@@ -226,7 +226,7 @@ body {
 .card-media {
   flex: 0 0 var(--media-max);
   width: var(--media-max);
-  max-width: 42%;
+  max-width: 52%;
   background: #000;
   border-right: 1px solid var(--border);
   align-self: flex-start;
@@ -426,9 +426,9 @@ body {
 /* Tablet / narrow desktop: slightly smaller media strip still 16:9 */
 @media (max-width: 720px) {
   .card-media {
-    flex-basis: 240px;
-    width: 240px;
-    max-width: 38%;
+    flex-basis: 300px;
+    width: 300px;
+    max-width: 45%;
   }
 }
 
