@@ -65,12 +65,17 @@
         <h2 class="card-title"></h2>
         <p class="card-source"></p>
         <p class="card-summary"></p>
-        <a class="yt-link" target="_blank" rel="noopener noreferrer">
-          <span>Voir sur YouTube</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+        <div class="card-actions">
+          <a class="yt-link" target="_blank" rel="noopener noreferrer">
+            <span>Voir sur YouTube</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button type="button" class="copy-passage-btn">
+            <span class="copy-label">Copier le lien du passage</span>
+          </button>
+        </div>
       </div>
     </article>
   </template>

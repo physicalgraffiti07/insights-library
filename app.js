@@ -75,6 +75,23 @@
     render();
   }
 
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+
   function createCard(p) {
     const node = template.content.cloneNode(true);
     const article = node.querySelector(".card");
@@ -90,9 +107,37 @@
     node.querySelector(".card-source").textContent = p.source || "";
     node.querySelector(".card-summary").textContent = p.summary || "";
 
+    const passageUrl = watchUrl(p.videoId, p.start);
+
     const link = node.querySelector(".yt-link");
-    link.href = watchUrl(p.videoId, p.start);
+    link.href = passageUrl;
     link.setAttribute("aria-label", `Voir « ${p.title} » sur YouTube à ${formatTime(p.start)}`);
+
+    const copyBtn = node.querySelector(".copy-passage-btn");
+    const copyLabel = copyBtn.querySelector(".copy-label");
+    copyBtn.setAttribute(
+      "aria-label",
+      `Copier le lien du passage « ${p.title} » (démarrage à ${formatTime(p.start)})`
+    );
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await copyText(passageUrl);
+        copyBtn.classList.add("is-copied");
+        copyLabel.textContent = "Copié";
+        window.clearTimeout(copyBtn._copiedTimer);
+        copyBtn._copiedTimer = window.setTimeout(() => {
+          copyBtn.classList.remove("is-copied");
+          copyLabel.textContent = "Copier le lien du passage";
+        }, 1800);
+      } catch (err) {
+        console.error(err);
+        copyLabel.textContent = "Erreur";
+        window.clearTimeout(copyBtn._copiedTimer);
+        copyBtn._copiedTimer = window.setTimeout(() => {
+          copyLabel.textContent = "Copier le lien du passage";
+        }, 1800);
+      }
+    });
 
     return node;
   }
