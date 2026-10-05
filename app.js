@@ -96,22 +96,50 @@
     document.body.removeChild(ta);
   }
 
-  function activateEmbed(wrap, videoId, start, end, title) {
+function activateEmbed(wrap, videoId, start, end, title) {
     if (wrap.dataset.activated === "1") return;
     wrap.dataset.activated = "1";
 
+    const params = new URLSearchParams({
+      start: String(start ?? 0),
+      rel: "0",
+      playsinline: "1",
+      autoplay: "1",
+      mute: "0",
+      enablejsapi: "1",
+      widget_referrer: window.location.origin || "",
+      origin: window.location.origin || "",
+    });
+    // omit end — some Chrome setups black-screen when end is set with short clips
+    if (end != null && end !== "" && Number(end) > Number(start)) {
+      params.set("end", String(end));
+    }
+
     const iframe = document.createElement("iframe");
-    iframe.src = embedUrl(videoId, start, end);
+    iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${params}`;
     iframe.title = title || "Extrait YouTube";
     iframe.allow =
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
     iframe.allowFullscreen = true;
-    iframe.referrerPolicy = "origin";
-    iframe.setAttribute("loading", "eager");
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.setAttribute("frameborder", "0");
+    // Chrome: sending a referrer is required; never use no-referrer
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;background:#000";
 
     wrap.innerHTML = "";
     wrap.appendChild(iframe);
+
+    // Fallback if still black after 2.5s: offer / auto-open watch URL
+    const fallback = document.createElement("a");
+    fallback.className = "embed-fallback";
+    fallback.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${start}s`;
+    fallback.target = "_blank";
+    fallback.rel = "noopener noreferrer";
+    fallback.textContent = "Si l’écran reste noir, ouvrir le passage sur YouTube";
+    wrap.appendChild(fallback);
   }
+
 
   function createCard(p) {
     const node = template.content.cloneNode(true);

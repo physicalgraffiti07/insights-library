@@ -568,3 +568,21 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.embed-fallback {
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 2;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  color: #1c1814;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.embed-wrap:has(iframe) .embed-fallback { opacity: 0.85; }
