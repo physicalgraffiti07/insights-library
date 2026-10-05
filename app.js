@@ -23,18 +23,17 @@
 
   function embedUrl(videoId, start, end) {
     const params = new URLSearchParams({
-      start: String(start),
-      end: String(end),
+      start: String(start ?? ""),
+      end: String(end ?? ""),
       rel: "0",
-      modestbranding: "1",
       playsinline: "1",
+      autoplay: "1",
     });
-    // Identify embed host for YouTube (avoids Error 153 when Referer is required)
-    if (window.location && window.location.origin && window.location.origin !== "null") {
-      params.set("origin", window.location.origin);
-    }
-    // Use www.youtube.com (not youtube-nocookie) for more reliable playback on Pages
     return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${params}`;
+  }
+
+  function thumbUrl(videoId) {
+    return `https://i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
   }
 
   function watchUrl(videoId, start) {
@@ -62,7 +61,6 @@
   }
 
   function buildFilters(themes) {
-    // Keep "Tout", rebuild the rest
     filtersEl.querySelectorAll(".filter-btn:not([data-filter='all'])").forEach((b) => b.remove());
     themes.forEach((theme) => {
       const btn = document.createElement("button");
@@ -82,7 +80,6 @@
     render();
   }
 
-
   async function copyText(text) {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
@@ -99,17 +96,45 @@
     document.body.removeChild(ta);
   }
 
+  function activateEmbed(wrap, videoId, start, end, title) {
+    if (wrap.dataset.activated === "1") return;
+    wrap.dataset.activated = "1";
+
+    const iframe = document.createElement("iframe");
+    iframe.src = embedUrl(videoId, start, end);
+    iframe.title = title || "Extrait YouTube";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "origin";
+    iframe.setAttribute("loading", "eager");
+
+    wrap.innerHTML = "";
+    wrap.appendChild(iframe);
+  }
+
   function createCard(p) {
     const node = template.content.cloneNode(true);
     const article = node.querySelector(".card");
     article.dataset.id = p.id || "";
 
-    const iframe = node.querySelector("iframe");
-    iframe.src = embedUrl(p.videoId, p.start, p.end);
-    iframe.title = p.title || "Extrait YouTube";
+    const wrap = node.querySelector(".embed-wrap");
+    const facade = node.querySelector(".yt-facade");
+    const thumb = node.querySelector(".yt-thumb");
+    const title = p.title || "Extrait YouTube";
 
-    node.querySelector(".theme-pill").textContent = p.theme || (p.themes && p.themes.join(" / ")) || "—";
-    node.querySelector(".time-range").textContent = `${formatTime(p.start)} → ${formatTime(p.end)}`;
+    thumb.src = thumbUrl(p.videoId);
+    thumb.alt = "";
+    facade.setAttribute("aria-label", `Lire « ${title} »`);
+
+    facade.addEventListener("click", () => {
+      activateEmbed(wrap, p.videoId, p.start, p.end, title);
+    });
+
+    node.querySelector(".theme-pill").textContent =
+      p.theme || (p.themes && p.themes.join(" / ")) || "—";
+    node.querySelector(".time-range").textContent =
+      `${formatTime(p.start)} → ${formatTime(p.end)}`;
     node.querySelector(".card-title").textContent = p.title || "";
     node.querySelector(".card-source").textContent = p.source || "";
     node.querySelector(".card-summary").textContent = p.summary || "";
@@ -118,7 +143,10 @@
 
     const link = node.querySelector(".yt-link");
     link.href = passageUrl;
-    link.setAttribute("aria-label", `Voir « ${p.title} » sur YouTube à ${formatTime(p.start)}`);
+    link.setAttribute(
+      "aria-label",
+      `Voir « ${p.title} » sur YouTube à ${formatTime(p.start)}`
+    );
 
     const copyBtn = node.querySelector(".copy-passage-btn");
     const copyLabel = copyBtn.querySelector(".copy-label");
@@ -171,7 +199,6 @@
     setActiveFilter(btn.dataset.filter);
   });
 
-  // Deep-link support: ?theme=Fiscalité or #holding-menottes-dorees
   function applyUrlState() {
     const params = new URLSearchParams(window.location.search);
     const themeParam = params.get("theme");

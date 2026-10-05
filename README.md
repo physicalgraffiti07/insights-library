@@ -49,8 +49,9 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 - **start** / **end** — secondes (début et fin de l’extrait)
 - **title**, **source**, **summary** — textes affichés
 
-L’embed utilise :
-`https://www.youtube-nocookie.com/embed/VIDEO_ID?start=X&end=Y&rel=0`
+Lecture en **click-to-play** : vignette YouTube + bouton play ; l’iframe
+`https://www.youtube.com/embed/VIDEO_ID?start=&end=&rel=0&playsinline=1&autoplay=1`
+n’est chargée qu’au clic (geste utilisateur).
 
 Le bouton « Voir sur YouTube » pointe vers :
 `https://www.youtube.com/watch?v=VIDEO_ID&t=STARTs`
