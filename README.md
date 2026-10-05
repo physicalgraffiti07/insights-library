@@ -49,11 +49,15 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 - **start** / **end** — secondes (début et fin de l’extrait)
 - **title**, **source**, **summary** — textes affichés
 
-Lecture en **click-to-play** : vignette YouTube + bouton play ; l’iframe
-`https://www.youtube.com/embed/VIDEO_ID?start=&end=&rel=0&playsinline=1&autoplay=1`
-n’est chargée qu’au clic (geste utilisateur).
+Cartes **typographiques** (pas de vignette YouTube) : grand titre sérif,
+chrome minimal. Lecture via « **Lire le passage** » (lien horodaté YouTube,
+fiable) et optionnellement « **Lire ici** » (embed click-to-load).
 
-Le bouton « Voir sur YouTube » pointe vers :
+L’iframe
+`https://www.youtube.com/embed/VIDEO_ID?start=&end=&rel=0&playsinline=1&autoplay=1`
+n’est chargée qu’au clic sur « Lire ici ».
+
+« Lire le passage » / « Voir sur YouTube » pointent vers :
 `https://www.youtube.com/watch?v=VIDEO_ID&t=STARTs`
 
 ## Filtres & liens

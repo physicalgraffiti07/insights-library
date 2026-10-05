@@ -21,21 +21,6 @@
     return `${m}:${String(sec).padStart(2, "0")}`;
   }
 
-  function embedUrl(videoId, start, end) {
-    const params = new URLSearchParams({
-      start: String(start ?? ""),
-      end: String(end ?? ""),
-      rel: "0",
-      playsinline: "1",
-      autoplay: "1",
-    });
-    return `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${params}`;
-  }
-
-  function thumbUrl(videoId) {
-    return `https://i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
-  }
-
   function watchUrl(videoId, start) {
     return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${start}s`;
   }
@@ -96,7 +81,7 @@
     document.body.removeChild(ta);
   }
 
-function activateEmbed(wrap, videoId, start, end, title) {
+  function activateEmbed(wrap, videoId, start, end, title) {
     if (wrap.dataset.activated === "1") return;
     wrap.dataset.activated = "1";
 
@@ -110,7 +95,7 @@ function activateEmbed(wrap, videoId, start, end, title) {
       widget_referrer: window.location.origin || "",
       origin: window.location.origin || "",
     });
-    // omit end — some Chrome setups black-screen when end is set with short clips
+    // omit end when unsafe — some Chrome setups black-screen with short clips
     if (end != null && end !== "" && Number(end) > Number(start)) {
       params.set("end", String(end));
     }
@@ -123,41 +108,29 @@ function activateEmbed(wrap, videoId, start, end, title) {
     iframe.allowFullscreen = true;
     iframe.setAttribute("allowfullscreen", "");
     iframe.setAttribute("frameborder", "0");
-    // Chrome: sending a referrer is required; never use no-referrer
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
-    iframe.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;background:#000";
+    iframe.style.cssText =
+      "position:absolute;inset:0;width:100%;height:100%;border:0;background:#000";
 
     wrap.innerHTML = "";
     wrap.appendChild(iframe);
 
-    // Fallback if still black after 2.5s: offer / auto-open watch URL
     const fallback = document.createElement("a");
     fallback.className = "embed-fallback";
-    fallback.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${start}s`;
+    fallback.href = watchUrl(videoId, start);
     fallback.target = "_blank";
     fallback.rel = "noopener noreferrer";
     fallback.textContent = "Si l’écran reste noir, ouvrir le passage sur YouTube";
     wrap.appendChild(fallback);
   }
 
-
   function createCard(p) {
     const node = template.content.cloneNode(true);
     const article = node.querySelector(".card");
     article.dataset.id = p.id || "";
 
-    const wrap = node.querySelector(".embed-wrap");
-    const facade = node.querySelector(".yt-facade");
-    const thumb = node.querySelector(".yt-thumb");
     const title = p.title || "Extrait YouTube";
-
-    thumb.src = thumbUrl(p.videoId);
-    thumb.alt = "";
-    facade.setAttribute("aria-label", `Lire « ${title} »`);
-
-    facade.addEventListener("click", () => {
-      activateEmbed(wrap, p.videoId, p.start, p.end, title);
-    });
+    const passageUrl = watchUrl(p.videoId, p.start);
 
     node.querySelector(".theme-pill").textContent =
       p.theme || (p.themes && p.themes.join(" / ")) || "—";
@@ -167,20 +140,36 @@ function activateEmbed(wrap, videoId, start, end, title) {
     node.querySelector(".card-source").textContent = p.source || "";
     node.querySelector(".card-summary").textContent = p.summary || "";
 
-    const passageUrl = watchUrl(p.videoId, p.start);
+    const lirePassage = node.querySelector(".lire-passage");
+    lirePassage.href = passageUrl;
+    lirePassage.setAttribute(
+      "aria-label",
+      `Lire le passage « ${title} » sur YouTube à ${formatTime(p.start)}`
+    );
+
+    const player = node.querySelector(".card-player");
+    const wrap = node.querySelector(".embed-wrap");
+    const lireIci = node.querySelector(".lire-ici-btn");
+    lireIci.setAttribute("aria-label", `Lire « ${title} » ici (embed)`);
+    lireIci.addEventListener("click", () => {
+      player.hidden = false;
+      lireIci.classList.add("is-active");
+      activateEmbed(wrap, p.videoId, p.start, p.end, title);
+      player.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
 
     const link = node.querySelector(".yt-link");
     link.href = passageUrl;
     link.setAttribute(
       "aria-label",
-      `Voir « ${p.title} » sur YouTube à ${formatTime(p.start)}`
+      `Voir « ${title} » sur YouTube à ${formatTime(p.start)}`
     );
 
     const copyBtn = node.querySelector(".copy-passage-btn");
     const copyLabel = copyBtn.querySelector(".copy-label");
     copyBtn.setAttribute(
       "aria-label",
-      `Copier le lien du passage « ${p.title} » (démarrage à ${formatTime(p.start)})`
+      `Copier le lien du passage « ${title} » (démarrage à ${formatTime(p.start)})`
     );
     copyBtn.addEventListener("click", async () => {
       try {
@@ -190,14 +179,14 @@ function activateEmbed(wrap, videoId, start, end, title) {
         window.clearTimeout(copyBtn._copiedTimer);
         copyBtn._copiedTimer = window.setTimeout(() => {
           copyBtn.classList.remove("is-copied");
-          copyLabel.textContent = "Copier le lien du passage";
+          copyLabel.textContent = "Copier le lien";
         }, 1800);
       } catch (err) {
         console.error(err);
         copyLabel.textContent = "Erreur";
         window.clearTimeout(copyBtn._copiedTimer);
         copyBtn._copiedTimer = window.setTimeout(() => {
-          copyLabel.textContent = "Copier le lien du passage";
+          copyLabel.textContent = "Copier le lien";
         }, 1800);
       }
     });
