@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bibliothèque privée de pépites YouTube — embeds uniquement." />
+  <title>Pépites — Bibliothèque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <div>
+          <p class="brand-eyebrow">Collection privée</p>
+          <h1 class="brand-title">Pépites</h1>
+        </div>
+      </div>
+      <p class="header-desc">Extraits YouTube sélectionnés — lecture directe, sans téléchargement.</p>
+    </div>
+  </header>
+
+  <main class="main">
+    <nav class="filters" id="filters" aria-label="Filtrer par thème">
+      <button type="button" class="filter-btn is-active" data-filter="all">Tout</button>
+    </nav>
+
+    <p class="result-count" id="result-count" aria-live="polite"></p>
+
+    <section class="grid" id="pepites-grid" aria-label="Liste des pépites"></section>
+
+    <p class="empty-state" id="empty-state" hidden>
+      Aucune pépite pour ce filtre.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>Embeds YouTube officiels uniquement · Ajoutez des pépites via <code>pepites.json</code></p>
+  </footer>
+
+  <template id="card-template">
+    <article class="card">
+      <div class="card-media">
+        <div class="embed-wrap">
+          <iframe
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"
+            title=""
+          ></iframe>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="theme-pill"></span>
+          <span class="time-range"></span>
+        </div>
+        <h2 class="card-title"></h2>
+        <p class="card-source"></p>
+        <p class="card-summary"></p>
+        <a class="yt-link" target="_blank" rel="noopener noreferrer">
+          <span>Voir sur YouTube</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

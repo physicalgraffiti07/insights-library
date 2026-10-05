@@ -1,0 +1,28 @@
+{
+  "title": "Bibliothèque de pépites",
+  "description": "Extraits YouTube sélectionnés — embeds uniquement, sans téléchargement.",
+  "pepites": [
+    {
+      "id": "holding-menottes-dorees",
+      "theme": "Fiscalité / Holding France",
+      "themes": ["Fiscalité", "Holding France"],
+      "title": "La holding française te lie à la France (menottes dorées)",
+      "videoId": "K9ioanmVmGw",
+      "start": 4417,
+      "end": 4483,
+      "source": "Comment s'enrichir en France ? — La Martingale / Mounir Laggoune",
+      "summary": "La holding est un objet légal basé en France : beaucoup d'avantages, mais elle te lie au pays. De plus en plus de gens n'y apportent plus leurs titres et partent avec pour se relocaliser. Une fois créée, ce sont des « menottes dorées »."
+    },
+    {
+      "id": "ultra-riches-isf",
+      "theme": "Fiscalité / Expatriation / ISF",
+      "themes": ["Fiscalité", "Expatriation", "ISF"],
+      "title": "Les ultra-riches partent face au retour de l'ISF",
+      "videoId": "K9ioanmVmGw",
+      "start": 4157,
+      "end": 4200,
+      "source": "Comment s'enrichir en France ? — La Martingale / Mounir Laggoune",
+      "summary": "Contexte du lien fiscal avec la France : les clients fortunés ont le dossier fiscaliste ouvert et partent — Italie, Belgique, États-Unis — face au retour de l'ISF."
+    }
+  ]
+}
