@@ -5,7 +5,7 @@ Collection privée d’extraits YouTube (embeds officiels uniquement — aucun t
 ## Ouvrir en local
 
 ```bash
-cd /workspace/pepites-library
+cd /workspace/insights-library
 python3 -m http.server 8765
 ```
 
@@ -64,7 +64,7 @@ Le bouton « Voir sur YouTube » pointe vers :
 ## Hébergement
 
 Publié sur GitHub Pages :
-[https://physicalgraffiti07.github.io/pepites-library/](https://physicalgraffiti07.github.io/pepites-library/)
+[https://physicalgraffiti07.github.io/insights-library/](https://physicalgraffiti07.github.io/insights-library/)
 
 Branche `main`, racine `/`.
 
