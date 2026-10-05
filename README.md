@@ -18,7 +18,7 @@ Puis ouvrir [http://127.0.0.1:8765](http://127.0.0.1:8765) (ou le port indiqué)
 | Fichier         | Rôle                                      |
 |-----------------|-------------------------------------------|
 | `index.html`    | Page unique                               |
-| `styles.css`    | Thème sombre élégant                      |
+| `styles.css`    | Thème clair élégant (blanc / champagne)                      |
 | `app.js`        | Filtres, cartes, embeds                   |
 | `pepites.json`  | Données — ajoutez vos insights ici        |
 

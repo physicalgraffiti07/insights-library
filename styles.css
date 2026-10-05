@@ -1,22 +1,22 @@
-/* —— Insights library — elegant dark theme —— */
+/* —— Insights library — refined light / white theme —— */
 :root {
-  --bg: #0c0b0a;
-  --bg-elevated: #161412;
-  --bg-card: #1a1714;
-  --bg-card-hover: #211e1a;
-  --border: rgba(232, 216, 184, 0.1);
-  --border-strong: rgba(232, 216, 184, 0.22);
-  --text: #f3ebe0;
-  --text-muted: #a89a88;
-  --text-soft: #7a6e60;
-  --accent: #c9a66b;
-  --accent-soft: rgba(201, 166, 107, 0.14);
-  --accent-glow: rgba(201, 166, 107, 0.28);
-  --pill-bg: rgba(201, 166, 107, 0.12);
-  --pill-text: #e0c897;
+  --bg: #faf8f5;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fffcf8;
+  --border: rgba(120, 95, 55, 0.12);
+  --border-strong: rgba(120, 95, 55, 0.24);
+  --text: #1c1814;
+  --text-muted: #5c5348;
+  --text-soft: #8a7e70;
+  --accent: #b8924a;
+  --accent-soft: rgba(184, 146, 74, 0.12);
+  --accent-glow: rgba(184, 146, 74, 0.22);
+  --pill-bg: rgba(184, 146, 74, 0.12);
+  --pill-text: #8a6a2e;
   --radius: 18px;
   --radius-sm: 999px;
-  --shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.7);
+  --shadow: 0 18px 40px -24px rgba(40, 30, 15, 0.18);
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", Georgia, serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -52,9 +52,9 @@ body {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(201, 166, 107, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 90% 0%, rgba(120, 90, 50, 0.08), transparent 50%),
-    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201, 166, 107, 0.05), transparent 60%);
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(184, 146, 74, 0.1), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 0%, rgba(200, 170, 110, 0.07), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(184, 146, 74, 0.06), transparent 60%);
 }
 
 .site-header,
@@ -96,7 +96,7 @@ body {
   color: var(--accent);
   background: var(--accent-soft);
   border: 1px solid var(--border-strong);
-  box-shadow: 0 0 24px var(--accent-glow);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .brand-eyebrow {
@@ -142,7 +142,7 @@ body {
 .filter-btn {
   appearance: none;
   border: 1px solid var(--border);
-  background: transparent;
+  background: var(--bg-elevated);
   color: var(--text-muted);
   font-family: inherit;
   font-size: 0.82rem;
@@ -153,13 +153,14 @@ body {
   border-radius: var(--radius-sm);
   cursor: pointer;
   touch-action: manipulation;
-  transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.2s var(--ease);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.2s var(--ease), box-shadow 0.25s var(--ease);
 }
 
 .filter-btn:hover {
   color: var(--text);
   border-color: var(--border-strong);
-  background: rgba(255, 255, 255, 0.03);
+  background: #fff;
+  box-shadow: 0 4px 12px -6px rgba(40, 30, 15, 0.12);
 }
 
 .filter-btn.is-active {
@@ -204,7 +205,7 @@ body {
 .card:hover {
   border-color: var(--border-strong);
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 22px 44px -20px rgba(40, 30, 15, 0.2);
 }
 
 @keyframes card-in {
@@ -227,7 +228,7 @@ body {
   flex: 0 0 var(--media-max);
   width: var(--media-max);
   max-width: 52%;
-  background: #000;
+  background: #111;
   border-right: 1px solid var(--border);
   align-self: flex-start;
 }
@@ -276,7 +277,7 @@ body {
   letter-spacing: 0.03em;
   color: var(--pill-text);
   background: var(--pill-bg);
-  border: 1px solid rgba(201, 166, 107, 0.2);
+  border: 1px solid rgba(184, 146, 74, 0.28);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -332,14 +333,14 @@ body {
   color: var(--accent);
   text-decoration: none;
   background: var(--accent-soft);
-  border: 1px solid rgba(201, 166, 107, 0.22);
+  border: 1px solid rgba(184, 146, 74, 0.28);
   touch-action: manipulation;
   transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.2s var(--ease);
 }
 
 .yt-link:hover {
-  background: rgba(201, 166, 107, 0.22);
-  border-color: rgba(201, 166, 107, 0.4);
+  background: rgba(184, 146, 74, 0.2);
+  border-color: rgba(184, 146, 74, 0.45);
   transform: translateX(2px);
 }
 
@@ -372,7 +373,7 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(28, 24, 20, 0.03);
   border: 1px solid var(--border);
   cursor: pointer;
   touch-action: manipulation;
@@ -382,7 +383,7 @@ body {
 .copy-passage-btn:hover {
   color: var(--text);
   border-color: var(--border-strong);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(28, 24, 20, 0.06);
 }
 
 .copy-passage-btn:focus-visible {
@@ -419,7 +420,7 @@ body {
   font-size: 0.85em;
   padding: 0.1em 0.35em;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(28, 24, 20, 0.05);
   color: var(--text-muted);
 }
 
