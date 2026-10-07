@@ -1,6 +1,6 @@
 # Bibliothèque d'insights
 
-Collection privée d’extraits YouTube (liens horodatés uniquement — aucun téléchargement ni re-upload).
+Collection privée d’extraits YouTube (liens horodatés) et de reels Instagram — aucun téléchargement ni re-upload.
 
 ## Ouvrir en local
 
@@ -61,6 +61,25 @@ Mise en page **horizontale** (desktop) :
 Les liens externes pointent vers :
 `https://www.youtube.com/watch?v=VIDEO_ID&t=STARTs`
 
+
+### Insight Instagram
+
+```json
+{
+  "id": "mon-slug-unique",
+  "platform": "instagram",
+  "theme": "Éducation",
+  "themes": ["Éducation"],
+  "title": "Titre du reel",
+  "instagramUrl": "https://www.instagram.com/reel/SHORTCODE/",
+  "instagramShortcode": "SHORTCODE",
+  "source": "Compte / contexte",
+  "summary": "Résumé court en français."
+}
+```
+
+Champs Instagram : **platform**, **instagramUrl**, **instagramShortcode** (pas de `start`/`end`). Couverture typographique avec meta « Reel » ; clic → embed Instagram ; boutons « Voir sur Instagram ».
+
 ## Filtres & liens
 
 - Filtres par thème en haut de page
@@ -76,4 +95,4 @@ Branche `main`, racine `/`.
 
 ## Règle copyright
 
-**Uniquement** des liens / embeds YouTube originaux avec horodatage. Ne jamais télécharger ni re-uploader la vidéo.
+**Uniquement** des liens / embeds YouTube (horodatés) ou Instagram originaux. Ne jamais télécharger ni re-uploader le contenu.

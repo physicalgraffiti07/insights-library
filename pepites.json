@@ -1,7 +1,18 @@
 {
   "title": "Bibliothèque d'insights",
-  "description": "Extraits YouTube sélectionnés — embeds uniquement, sans téléchargement.",
+  "description": "Extraits YouTube et reels Instagram sélectionnés — embeds uniquement, sans téléchargement.",
   "pepites": [
+    {
+      "id": "lecture-enfants-ecrans",
+      "platform": "instagram",
+      "theme": "Éducation",
+      "themes": ["Éducation"],
+      "title": "Redonner le goût de la lecture à l’heure des écrans",
+      "instagramUrl": "https://www.instagram.com/reel/DeBQm2gOU3Q/",
+      "instagramShortcode": "DeBQm2gOU3Q",
+      "source": "Comment redonner aux enfants le goût de la lecture — Festival école de la vie / Nicolas Mathieu",
+      "summary": "Face aux sollicitations immédiates des écrans, la lecture demande temps, attention et imagination. L’idée n’est pas d’opposer les deux mondes, mais de redonner à la lecture une place réelle : lire ensemble, laisser l’enfant choisir ses livres, créer des moments sans téléphone."
+    },
     {
       "id": "holding-menottes-dorees",
       "theme": "Fiscalité / Holding France",
