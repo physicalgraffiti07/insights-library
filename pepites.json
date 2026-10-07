@@ -3,10 +3,25 @@
   "description": "Extraits YouTube et reels Instagram sélectionnés — embeds uniquement, sans téléchargement.",
   "pepites": [
     {
+      "id": "sept-questions-dialogue-enfants",
+      "platform": "instagram",
+      "theme": "Éducation",
+      "themes": [
+        "Éducation"
+      ],
+      "title": "7 questions pour un autre dialogue avec vos enfants",
+      "instagramUrl": "https://www.instagram.com/reel/DbBhBVlsegO/",
+      "instagramShortcode": "DbBhBVlsegO",
+      "source": "7 questions pour un autre dialogue — Papa Parle (sources Joe Drummer Boy / Amy Morin)",
+      "summary": "Au lieu de l’interrogatoire « Comment s’est passée l’école ? », sept questions pour ouvrir vraiment le dialogue : meilleur moment de la journée, erreur dont on a appris, fierté pour quelqu’un, chose à améliorer, qui as-tu aidé, apprentissage le plus intéressant, et nouvelle chose à essayer."
+    },
+    {
       "id": "lecture-enfants-ecrans",
       "platform": "instagram",
       "theme": "Éducation",
-      "themes": ["Éducation"],
+      "themes": [
+        "Éducation"
+      ],
       "title": "Redonner le goût de la lecture à l’heure des écrans",
       "instagramUrl": "https://www.instagram.com/reel/DeBQm2gOU3Q/",
       "instagramShortcode": "DeBQm2gOU3Q",
