@@ -3,6 +3,19 @@
   "description": "Extraits YouTube et reels Instagram sélectionnés — embeds uniquement, sans téléchargement.",
   "pepites": [
     {
+      "id": "eduquer-a-la-volonte",
+      "theme": "Éducation",
+      "themes": [
+        "Éducation"
+      ],
+      "title": "Éduquer à la volonté : un muscle à travailler",
+      "videoId": "PWIok0MU2FY",
+      "start": 4742,
+      "end": 4822,
+      "source": "Éducation, transmission, ruralité… L'égalité des chances à la dérive ? — Excellence Ruralités / Michel Onfray",
+      "summary": "Michel Onfray dit avoir toujours enseigné « la volonté » : ne pas attendre que ça tombe du ciel ou que les autres agissent, mais avoir un projet et se donner concrètement les moyens de le réaliser (école, épicerie solidaire, cours du soir, festival, conseil municipal…). Selon lui, c'est ce qui manque le plus à une jeunesse qui veut tout, tout de suite : on éduque à lire, écrire, compter, penser, mais plus à vouloir — or la volonté, comme un muscle, se travaille."
+    },
+    {
       "id": "sept-questions-dialogue-enfants",
       "platform": "instagram",
       "theme": "Éducation",
