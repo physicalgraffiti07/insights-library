@@ -753,3 +753,44 @@ body {
     width: min(100%, 320px);
   }
 }
+
+/* —— Navigation Éducation / Fiscalité —— */
+.site-nav {
+  display: flex;
+  gap: 1.1rem;
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  color: var(--text-soft);
+  text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.site-nav a:hover {
+  color: var(--text);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+.site-nav a:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.filters[hidden] {
+  display: none;
+}
+
+.site-footer a {
+  color: inherit;
+  text-underline-offset: 2px;
+}

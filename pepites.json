@@ -1,9 +1,10 @@
 {
-  "title": "Bibliothèque d'insights",
-  "description": "Extraits YouTube et reels Instagram sélectionnés — embeds uniquement, sans téléchargement.",
+  "title": "Insights — Éducation",
+  "description": "Extraits vidéo sur l’éducation (YouTube, Instagram), plus une page Fiscalité. Champ « section » : « education » (défaut) ou « fiscalite ».",
   "pepites": [
     {
       "id": "eduquer-a-la-volonte",
+      "section": "education",
       "theme": "Éducation",
       "themes": [
         "Éducation"
@@ -17,6 +18,7 @@
     },
     {
       "id": "sept-questions-dialogue-enfants",
+      "section": "education",
       "platform": "instagram",
       "theme": "Éducation",
       "themes": [
@@ -30,6 +32,7 @@
     },
     {
       "id": "lecture-enfants-ecrans",
+      "section": "education",
       "platform": "instagram",
       "theme": "Éducation",
       "themes": [
@@ -43,6 +46,7 @@
     },
     {
       "id": "holding-menottes-dorees",
+      "section": "fiscalite",
       "theme": "Fiscalité / Holding France",
       "themes": [
         "Fiscalité",
@@ -57,6 +61,7 @@
     },
     {
       "id": "ultra-riches-isf",
+      "section": "fiscalite",
       "theme": "Fiscalité / Expatriation / ISF",
       "themes": [
         "Fiscalité",
@@ -72,6 +77,7 @@
     },
     {
       "id": "immobilier-toujours-taxe",
+      "section": "fiscalite",
       "theme": "Immobilier / Fiscalité",
       "themes": [
         "Immobilier",
@@ -86,6 +92,7 @@
     },
     {
       "id": "fortunes-immobilier-touche-pas",
+      "section": "fiscalite",
       "theme": "Immobilier / Patrimoine / Allocation",
       "themes": [
         "Immobilier",

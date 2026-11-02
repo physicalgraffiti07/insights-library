@@ -8,7 +8,45 @@
   const template = document.getElementById("card-template");
 
   let pepites = [];
+  let allPepites = [];
   let activeFilter = "all";
+
+  // Section de la page : "education" (accueil, défaut) ou "fiscalite" (page unique).
+  const PAGE_SECTION = (document.body.dataset.section || "education").trim();
+  const SECTION_PAGES = { education: "index.html", fiscalite: "fiscalite.html" };
+
+  // Toute fiche sans champ section (ou avec une valeur inconnue) va en éducation.
+  function sectionOf(p) {
+    const s = String((p && p.section) || "").trim().toLowerCase();
+    return s === "fiscalite" ? "fiscalite" : "education";
+  }
+
+  // Ancien lien vers l'accueil avec l'ancre d'un insight d'une autre section → redirection.
+  function redirectIfForeignHash() {
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (!hash) return false;
+    const target = allPepites.find((p) => p.id === hash);
+    if (!target) return false;
+    const sec = sectionOf(target);
+    if (sec === PAGE_SECTION) return false;
+    window.location.replace(`${SECTION_PAGES[sec]}#${encodeURIComponent(hash)}`);
+    return true;
+  }
+
+  // Ancien ?theme=… pointant vers un thème qui n'existe que dans l'autre section → redirection.
+  function redirectIfForeignTheme() {
+    const themeParam = new URLSearchParams(window.location.search).get("theme");
+    if (!themeParam || themeParam === "all") return false;
+    if (collectThemes(pepites).includes(themeParam)) return false;
+    const other = Object.keys(SECTION_PAGES).find(
+      (sec) =>
+        sec !== PAGE_SECTION &&
+        collectThemes(allPepites.filter((p) => sectionOf(p) === sec)).includes(themeParam)
+    );
+    if (!other) return false;
+    window.location.replace(SECTION_PAGES[other] + window.location.hash);
+    return true;
+  }
 
   function formatTime(seconds) {
     const s = Math.max(0, Math.floor(Number(seconds) || 0));
@@ -105,6 +143,12 @@
   }
 
   function buildFilters(themes) {
+    // Page fiscalité : liste simple, sans filtres. Éducation : filtres seulement si plusieurs thèmes.
+    if (filtersEl.dataset.mode === "off" || themes.length < 2) {
+      filtersEl.hidden = true;
+      return;
+    }
+    filtersEl.hidden = false;
     filtersEl.querySelectorAll(".filter-btn:not([data-filter='all'])").forEach((b) => b.remove());
     themes.forEach((theme) => {
       const btn = document.createElement("button");
@@ -333,13 +377,13 @@
   function applyUrlState() {
     const params = new URLSearchParams(window.location.search);
     const themeParam = params.get("theme");
-    if (themeParam) {
+    if (themeParam && !filtersEl.hidden) {
       const themes = collectThemes(pepites);
       if (themeParam === "all" || themes.includes(themeParam)) {
         setActiveFilter(themeParam);
       }
     }
-    const hash = window.location.hash.replace(/^#/, "");
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
     if (hash) {
       requestAnimationFrame(() => {
         const el = grid.querySelector(`[data-id="${CSS.escape(hash)}"]`);
@@ -348,13 +392,23 @@
     }
   }
 
+  window.addEventListener("hashchange", () => {
+    if (!allPepites.length || redirectIfForeignHash()) return;
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    const el = hash && grid.querySelector(`[data-id="${CSS.escape(hash)}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
   fetch("pepites.json", { cache: "no-store" })
     .then((r) => {
       if (!r.ok) throw new Error("Impossible de charger pepites.json");
       return r.json();
     })
     .then((data) => {
-      pepites = Array.isArray(data.pepites) ? data.pepites : [];
+      allPepites = Array.isArray(data.pepites) ? data.pepites : [];
+      pepites = allPepites.filter((p) => sectionOf(p) === PAGE_SECTION);
+      if (redirectIfForeignHash()) return;
+      if (redirectIfForeignTheme()) return;
       buildFilters(collectThemes(pepites));
       render();
       applyUrlState();

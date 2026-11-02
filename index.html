@@ -8,30 +8,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="description" content="Bibliothèque privée d'insights YouTube et Instagram — lecture directe, sans téléchargement." />
-  <title>Insights — Bibliothèque</title>
+  <meta name="description" content="Extraits vidéo sur l’éducation : volonté, dialogue avec les enfants, goût de la lecture. YouTube et Instagram, lecture directe." />
+  <title>Insights — Éducation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.20261016222207.css" />
+  <link rel="stylesheet" href="styles.20261102150525.css" />
 </head>
-<body>
+<body data-section="education">
   <div class="ambient" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
         <div>
-          <p class="brand-eyebrow">Collection privée</p>
-          <h1 class="brand-title">Insights</h1>
+          <p class="brand-eyebrow">Insights · collection privée</p>
+          <h1 class="brand-title">Éducation</h1>
+          <nav class="site-nav" aria-label="Sections">
+            <a href="index.html" aria-current="page">Éducation</a>
+            <a href="fiscalite.html">Fiscalité</a>
+          </nav>
         </div>
       </div>
-      <p class="header-desc">Extraits YouTube et reels Instagram — lecture directe, sans téléchargement.</p>
+      <p class="header-desc">Extraits vidéo pour éduquer, transmettre et dialoguer avec les enfants.</p>
     </div>
   </header>
 
   <main class="main">
-    <nav class="filters" id="filters" aria-label="Filtrer par thème">
+    <nav class="filters" id="filters" hidden aria-label="Filtrer par thème">
       <button type="button" class="filter-btn is-active" data-filter="all">Tout</button>
     </nav>
 
@@ -40,12 +44,12 @@
     <section class="grid" id="pepites-grid" aria-label="Liste des insights"></section>
 
     <p class="empty-state" id="empty-state" hidden>
-      Aucun insight pour ce filtre.
+      Aucun insight éducation pour ce filtre.
     </p>
   </main>
 
   <footer class="site-footer">
-    <p>Liens YouTube horodatés et reels Instagram · Ajoutez des insights via <code>pepites.json</code></p>
+    <p>Insights — Éducation · extraits YouTube horodatés et reels Instagram, sans téléchargement</p>
   </footer>
 
   <template id="card-template">
@@ -94,6 +98,6 @@
     </article>
   </template>
 
-  <script src="app.20261016222207.js"></script>
+  <script src="app.20261102150525.js"></script>
 </body>
 </html>
